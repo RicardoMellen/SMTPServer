@@ -1,0 +1,7 @@
+.
+
+FROM: <fran@234.41.1.1>
+TO: <ricardo@123.2.1.23>
+Subject: Asunto
+
+Enter your message here.

@@ -1,0 +1,21 @@
+.
+
+FROM: <fran@234.41.1.12>
+TO: <ricardo@123.23.45.234 asdf@1.1.1.1>
+Subject: Asunto
+
+Enter your message here.
+.
+
+FROM: <fran@234.41.1.12>
+TO: <ricardo@123.23.45.234 asdf@1.1.1.1 rmellen@2.2.2.2>
+Subject: Asunto
+
+Enter your message here.
+.
+
+FROM: <fran@234.41.1.12>
+TO: <ricardo@123.23.45.234 asdf@1.1.1.1 rmellen@2.2.2.2>
+Subject: Asunto
+
+Enter your message here.

@@ -1,0 +1,86 @@
+The user closes the connection.
+221 RicardoServer Service closing transmission channel 
+
+The user closes the connection.
+221 RicardoServer Service closing transmission channel 
+
+The user closes the connection.
+221 RicardoServer Service closing transmission channel 
+
+The user closes the connection.
+221 RicardoServer Service closing transmission channel 
+
+The user closes the connection.
+221 RicardoServer Service closing transmission channel 
+
+The user closes the connection.
+221 RicardoServer Service closing transmission channel 
+
+The user closes the connection.
+221 RicardoServer Service closing transmission channel 
+
+The user closes the connection.
+221 RicardoServer Service closing transmission channel 
+
+The user closes the connection.
+221 RicardoServer Service closing transmission channel 
+
+The user closes the connection.
+221 RicardoServer Service closing transmission channel 
+
+The user closes the connection.
+221 RicardoServer Service closing transmission channel 
+
+The user closes the connection.
+221 RicardoServer Service closing transmission channel 
+
+The user closes the connection.
+221 RicardoServer Service closing transmission channel 
+
+The user closes the connection.
+221 RicardoServer Service closing transmission channel 
+
+The user closes the connection.
+221 RicardoServer Service closing transmission channel 
+
+ 
+220  RicardoServer Service Ready 
+
+The user says Helo.
+HELO Fran-PC
+250 Requested mail action okay, completed 
+
+554 Not valid recipients (Only after DATA command) 
+
+The user closes the connection.
+221 RicardoServer Service closing transmission channel 
+
+ 
+220  RicardoServer Service Ready 
+
+The user says Helo.
+HELO Fran-PC
+250 Requested mail action okay, completed 
+
+The user writes Mail.
+MAIL FROM: <fran@234.41.1.1>
+250 OK 
+
+The user writes RCPT.
+RCPT TO: <ricardo@123.2.1.23>
+250 OK 
+
+The user writes Data.
+DATA 
+354 Start mail input; end with <CRLF>.<CRLF> 
+
+FROM: <fran@234.41.1.1>
+TO: <ricardo@123.2.1.23>
+Subject: Asunto
+
+Enter your message here.
+250 OK 
+
+The user closes the connection.
+221 RicardoServer Service closing transmission channel 
+
