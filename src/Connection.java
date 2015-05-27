@@ -180,6 +180,8 @@ public class Connection extends Thread {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+			input.close();
+			output.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}// First TRY
