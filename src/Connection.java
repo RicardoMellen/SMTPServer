@@ -25,11 +25,9 @@ public class Connection extends Thread {
 	public void run() {
 		try {
 			sServ = new ServerSocket(port);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+
 		while (true) {
-			try {
+
 				sCon = sServ.accept();
 				input = new BufferedReader(new InputStreamReader(
 						sCon.getInputStream()));
@@ -37,7 +35,7 @@ public class Connection extends Thread {
 				output.print(m.serverReady);
 				output.flush();
 				String read = "";
-				try {
+
 					read = input.readLine();
 					System.out.println(read);
 					stringHelo = read.split(" ", 2);
@@ -50,9 +48,7 @@ public class Connection extends Thread {
 					bwLog = new BufferedWriter(new FileWriter(fileLog, true));
 					bwLog.write(" \n");
 					bwLog.write(m.serverReady + "\n");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+
 				if (read.startsWith("HELO ")) {
 					output.print(m.serverConnection);
 					output.flush();
@@ -69,12 +65,10 @@ public class Connection extends Thread {
 				}
 				if (helo == true) {
 					while (!read.equals("QUIT")) {
-						try {
+
 							read = input.readLine();
 							System.out.println(read);
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+
 						if (read.startsWith("MAIL")) {
 							stringMail = read.split(" ", 3);
 							if (EmailOk.checkEmail(stringMail[2])) {
@@ -89,12 +83,10 @@ public class Connection extends Thread {
 								bwLog.write(m.serverRecipients + "\n");
 								break;
 							}
-							try {
+
 								read = input.readLine();
 								System.out.println(read);
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
+
 							arrayCount = 0;
 							while (read.startsWith("RCPT")) {
 								if (read.startsWith("RCPT")) {
@@ -175,17 +167,15 @@ public class Connection extends Thread {
 					bwLog.write(m.serverClose + "\n");
 					bwLog.close();
 				}// if helo
-				try {
+
 					sCon.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+
 			input.close();
 			output.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}// First TRY
 		}// while TRUE
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}// run()
 
 	public void saveMessage(String[] emails, String message) {
