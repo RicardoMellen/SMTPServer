@@ -9,7 +9,7 @@ public class Connection extends Thread {
 
 	// Variables
 	// bwlog is using for write on the file of LOGS and bwMessages for save in the Messages file.
-	int port = 25, maxUsers = 50, arrayCount = 0;
+	static final int port = 25, maxUsers = 50, arrayCount = 0;
 	ServerSocket sServ;
 	Socket sCon;
 	BufferedReader input;
