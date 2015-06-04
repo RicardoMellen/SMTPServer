@@ -23,6 +23,7 @@ public class Connection extends Thread {
 	Boolean control = true, helo = false;
 	Calendar date = Calendar.getInstance();
 	Messages m = new Messages();
+	String h = "HELO", q = "QUIT", d = "DATA", r = "RCPT", m = "MAIL";
 
 	public void run() {
 		try {
@@ -54,7 +55,7 @@ public class Connection extends Thread {
 					bwLog.write(" \n");
 					bwLog.write(m.serverReady + "\n");
 				// Helo, must be first word
-				if (read.startsWith("HELO ")) {
+				if (read.startsWith(h)) {
 					output.print(m.serverConnection);
 					output.flush();
 					bwLog.write("The user says Helo.\n");
@@ -71,13 +72,13 @@ public class Connection extends Thread {
 				if (helo == true) {
 					
 					// If the users doesnt write QUIT we can follow with the loop
-					while (!read.equals("QUIT")) {
+					while (!read.equals("q")) {
 
 							read = input.readLine();
 							System.out.println(read);
 
 						// Mail, second word
-						if (read.startsWith("MAIL")) {
+						if (read.startsWith(m)) {
 							stringMail = read.split(" ", 3);
 							if (EmailOk.checkEmail(stringMail[2])) {
 								output.print(m.serverOK);
@@ -96,8 +97,8 @@ public class Connection extends Thread {
 								System.out.println(read);
 							// RCTP three word
 							arrayCount = 0;
-							while (read.startsWith("RCPT")) {
-								if (read.startsWith("RCPT")) {
+							while (read.startsWith(r)) {
+								if (read.startsWith(r)) {
 									stringRcpt = read.split(" ", 3);
 									if (EmailOk.checkEmail(stringRcpt[2])) {
 										output.print(m.serverOK);
@@ -126,7 +127,7 @@ public class Connection extends Thread {
 							}// while RCTP
 							
 							//Data, four word
-							if (read.startsWith("DATA")) {
+							if (read.startsWith(d)) {
 								output.println(m.serverData);
 								output.flush();
 								bwLog.write("The user writes Data.\n");
