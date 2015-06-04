@@ -34,7 +34,7 @@ public class Connection extends Thread {
 				input = new BufferedReader(new InputStreamReader(
 						sCon.getInputStream()));
 				output = new PrintWriter(sCon.getOutputStream(), true);
-				output.print(m.serverReady);
+				output.print(Messages.serverReady);
 				output.flush();
 				String read = "";
 				try {
@@ -49,22 +49,22 @@ public class Connection extends Thread {
 					fileLog = new File(rutaLog);
 					bwLog = new BufferedWriter(new FileWriter(fileLog, true));
 					bwLog.write(" \n");
-					bwLog.write(m.serverReady + "\n");
+					bwLog.write(Messages.serverReady + "\n");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 				if (read.startsWith("HELO ")) {
-					output.print(m.serverConnection);
+					output.print(Messages.serverConnection);
 					output.flush();
 					bwLog.write("The user says Helo.\n");
 					bwLog.write(read + "\n");
-					bwLog.write(m.serverConnection + "\n");
+					bwLog.write(Messages.serverConnection + "\n");
 					helo = true;
 				}// if HELO
 				else {
-					output.println(m.serverCommand);
+					output.println(Messages.serverCommand);
 					output.flush();
-					bwLog.write(m.serverCommand + "\n");
+					bwLog.write(Messages.serverCommand + "\n");
 					bwLog.close();
 				}
 				if (helo == true) {
@@ -78,15 +78,15 @@ public class Connection extends Thread {
 						if (read.startsWith("MAIL")) {
 							stringMail = read.split(" ", 3);
 							if (EmailOk.checkEmail(stringMail[2])) {
-								output.print(m.serverOK);
+								output.print(Messages.serverOK);
 								output.flush();
 								bwLog.write("The user writes Mail.\n");
 								bwLog.write(read + "\n");
-								bwLog.write(m.serverOK + "\n");
+								bwLog.write(Messages.serverOK + "\n");
 							} else {
-								output.print(m.serverRecipients);
+								output.print(Messages.serverRecipients);
 								output.flush();
-								bwLog.write(m.serverRecipients + "\n");
+								bwLog.write(Messages.serverRecipients + "\n");
 								break;
 							}
 							try {
@@ -100,36 +100,36 @@ public class Connection extends Thread {
 								if (read.startsWith("RCPT")) {
 									stringRcpt = read.split(" ", 3);
 									if (EmailOk.checkEmail(stringRcpt[2])) {
-										output.print(m.serverOK);
+										output.print(Messages.serverOK);
 										output.flush();
 										bwLog.write("The user writes RCPT.\n");
 										bwLog.write(read + "\n");
-										bwLog.write(m.serverOK + "\n");
+										bwLog.write(Messages.serverOK + "\n");
 										emails[arrayCount] = stringRcpt[2];
 										arrayCount++;
 									} else {
-										output.print(m.serverRecipients);
+										output.print(Messages.serverRecipients);
 										output.flush();
-										bwLog.write(m.serverRecipients + "\n");
+										bwLog.write(Messages.serverRecipients + "\n");
 										break;
 									}
 
 									read = input.readLine();
 									System.out.println(read);
 								} else {
-									output.println(m.serverCommand);
+									output.println(Messages.serverCommand);
 									output.flush();
-									bwLog.write(m.serverCommand + "\n");
+									bwLog.write(Messages.serverCommand + "\n");
 									bwLog.close();
 									break;
 								}
 							}// while RCTP
 							if (read.startsWith("DATA")) {
-								output.println(m.serverData);
+								output.println(Messages.serverData);
 								output.flush();
 								bwLog.write("The user writes Data.\n");
 								bwLog.write(read + "\n");
-								bwLog.write(m.serverData + "\n");
+								bwLog.write(Messages.serverData + "\n");
 								read = input.readLine();
 								saveMessage(emails,".\n\n"+ read + "\n");
 								System.out.println(read);
@@ -137,8 +137,8 @@ public class Connection extends Thread {
 								while (!read.endsWith(".")) {
 									read = input.readLine();
 									if (read.equals("QUIT")) {
-										System.out.println(m.serverParameters);
-										bwLog.write(m.serverParameters + "\n");
+										System.out.println(Messages.serverParameters);
+										bwLog.write(Messages.serverParameters + "\n");
 										control = false;
 										break;
 									}
@@ -147,32 +147,32 @@ public class Connection extends Thread {
 									saveMessage(emails, read + "\n");
 								}
 								if (control == true) {
-									output.println(m.serverOK);
+									output.println(Messages.serverOK);
 									output.flush();
-									bwLog.write(m.serverOK + "\n");
+									bwLog.write(Messages.serverOK + "\n");
 									read = input.readLine();
 									System.out.println(read);
 								}
 							} // if Data
 							else {
-								output.println(m.serverCommand);
+								output.println(Messages.serverCommand);
 								output.flush();
-								bwLog.write(m.serverCommand + "\n");
+								bwLog.write(Messages.serverCommand + "\n");
 								bwLog.close();
 								break;
 							}
 						}// if Mail
 						else {
-							output.println(m.serverCommand);
+							output.println(Messages.serverCommand);
 							output.flush();
-							bwLog.write(m.serverCommand + "\n");
+							bwLog.write(Messages.serverCommand + "\n");
 							break;
 						}
 					}// while QUIT
 					bwLog.write("The user closes the connection.\n");
-					output.println(m.serverClose);
+					output.println(Messages.serverClose);
 					output.flush();
-					bwLog.write(m.serverClose + "\n");
+					bwLog.write(Messages.serverClose + "\n");
 					bwLog.close();
 				}// if helo
 				try {
