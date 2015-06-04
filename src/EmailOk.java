@@ -9,12 +9,9 @@ public class EmailOk {
 	
 	public static boolean checkEmail (String email) 
 	{
-		boolean ok = false;
 	    Pattern p = Pattern.compile(PATTERN_EMAIL);
 	    Matcher m = p.matcher(email.toLowerCase());
-	    if (m.matches()){
-	    	ok = true;
-	    }
-	    return ok;
+
+	    return m.matches;
 	}
 }
