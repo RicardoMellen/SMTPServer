@@ -7,6 +7,8 @@ import java.util.StringTokenizer;
 
 public class Connection extends Thread {
 
+	// Variables
+	// bwlog is using for write on the file of LOGS and bwMessages for save in the Messages file.
 	int port = 25, maxUsers = 50, arrayCount = 0;
 	ServerSocket sServ;
 	Socket sCon;
@@ -25,9 +27,11 @@ public class Connection extends Thread {
 	public void run() {
 		try {
 			sServ = new ServerSocket(port);
-
+		
+		// While true loop
 		while (true) {
-
+				
+				//Open the connection
 				sCon = sServ.accept();
 				input = new BufferedReader(new InputStreamReader(
 						sCon.getInputStream()));
@@ -35,7 +39,8 @@ public class Connection extends Thread {
 				output.print(m.serverReady);
 				output.flush();
 				String read = "";
-
+					
+					// Create the .txt files for save the Logs
 					read = input.readLine();
 					System.out.println(read);
 					stringHelo = read.split(" ", 2);
@@ -48,7 +53,7 @@ public class Connection extends Thread {
 					bwLog = new BufferedWriter(new FileWriter(fileLog, true));
 					bwLog.write(" \n");
 					bwLog.write(m.serverReady + "\n");
-
+				// Helo, must be first word
 				if (read.startsWith("HELO ")) {
 					output.print(m.serverConnection);
 					output.flush();
@@ -64,11 +69,14 @@ public class Connection extends Thread {
 					bwLog.close();
 				}
 				if (helo == true) {
+					
+					// If the users doesnt write QUIT we can follow with the loop
 					while (!read.equals("QUIT")) {
 
 							read = input.readLine();
 							System.out.println(read);
 
+						// Mail, second word
 						if (read.startsWith("MAIL")) {
 							stringMail = read.split(" ", 3);
 							if (EmailOk.checkEmail(stringMail[2])) {
@@ -86,7 +94,7 @@ public class Connection extends Thread {
 
 								read = input.readLine();
 								System.out.println(read);
-
+							// RCTP three word
 							arrayCount = 0;
 							while (read.startsWith("RCPT")) {
 								if (read.startsWith("RCPT")) {
@@ -116,6 +124,8 @@ public class Connection extends Thread {
 									break;
 								}
 							}// while RCTP
+							
+							//Data, four word
 							if (read.startsWith("DATA")) {
 								output.println(m.serverData);
 								output.flush();
@@ -178,6 +188,8 @@ public class Connection extends Thread {
 		}
 	}// run()
 
+
+	// For save all the messages in the differents users
 	public void saveMessage(String[] emails, String message) {
 		for (int i = 0; i <= arrayCount-1; i++) {
 			try {
